@@ -173,6 +173,12 @@ export interface ConferenceConfig {
   };
 }
 
+export const getAssetUrl = (path: string): string => {
+  const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+  const cleanPath = path.replace(/^\//, '');
+  return `${base}/${cleanPath}`;
+};
+
 export const conferenceConfig: ConferenceConfig = {
   conference: {
     acronym: "ICVLIC",
@@ -197,8 +203,8 @@ export const conferenceConfig: ConferenceConfig = {
     ],
     organizingUnit: "Organized by the Department of Electronics and Communication Engineering & Allied Schools",
     branding: {
-      universityLogo: "/assets/branding/vfstr-logo.png",
-      universityFullLogo: "/assets/branding/vfstr-full-logo.png",
+      universityLogo: getAssetUrl("assets/branding/vfstr-logo.png"),
+      universityFullLogo: getAssetUrl("assets/branding/vfstr-full-logo.png"),
       conferenceLogo: "" // Will display stylish textual ICVLIC branding until custom mark is uploaded
     },
     dates: {
@@ -222,8 +228,8 @@ export const conferenceConfig: ConferenceConfig = {
     tagline: "Centre of Excellence in Technical & Higher Education",
     establishedNote: "Accredited with NAAC 'A+' Grade | Vadlamudi, Guntur, Andhra Pradesh, India",
     websiteUrl: "https://www.vignan.ac.in",
-    campusMainPhoto: "/assets/campus/campus-main.jpg",
-    campusBuildingPhoto: "/assets/campus/campus-building.jpg",
+    campusMainPhoto: getAssetUrl("assets/campus/campus-main.jpg"),
+    campusBuildingPhoto: getAssetUrl("assets/campus/campus-building.jpg"),
     overview: [
       "Vignan's Foundation for Science, Technology & Research (Deemed to be University) is located in Vadlamudi, Guntur district of Andhra Pradesh. The institution is dedicated to providing quality education in engineering, technology, applied sciences, and management.",
       "Surrounded by lush green campus environs, the university boasts modern academic infrastructure, advanced research laboratories, digital libraries, and state-of-the-art convention facilities that host prestigious national and international academic symposiums."

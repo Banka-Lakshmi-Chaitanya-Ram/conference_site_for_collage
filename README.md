@@ -82,6 +82,24 @@ When faculty organizers finalize official details, follow this checklist:
 ## 5. Technology Stack & Design Standard
 
 - **Framework**: React 19 + TypeScript + Vite
-- **Styling**: Tailored Academic CSS Design System (`src/index.css`) with light theme, deep navy text, sophisticated blue accents, and restrained slate dividers.
+- **Styling**: Tailored Academic CSS Design System (`src/index.css`) with institutional Oxford Navy, official Vignan Crimson, and Playfair Display serif typography.
 - **Icons**: Lucide React
 - **Accessibility**: Full semantic HTML5 landmarks (`<header>`, `<main>`, `<section>`, `<footer>`), keyboard accessible drawer and modals, ARIA expanded/controls attributes, and `prefers-reduced-motion` compliance.
+
+---
+
+## 6. Live Deployment (GitHub Pages)
+
+The website is set up for continuous deployment via **GitHub Actions** directly to **GitHub Pages**:
+
+- **Live URL**: `https://banka-lakshmi-chaitanya-ram.github.io/conference_site_for_collage/`
+- **Workflow**: Defined in `.github/workflows/deploy.yml`
+- **Automatic Triggers**: Every push to the `main` branch automatically builds and publishes the latest production bundle.
+
+### Enabling GitHub Pages on the Repository (One-Time Setup):
+1. Navigate to your repository on GitHub: `https://github.com/Banka-Lakshmi-Chaitanya-Ram/conference_site_for_collage`
+2. Click **Settings** (top navigation tab).
+3. In the left sidebar, click **Pages** (under *Code and automation*).
+4. Under **Build and deployment** > **Source**, choose **GitHub Actions**.
+5. Once selected, the workflow will automatically deploy and host your conference site live!
+
