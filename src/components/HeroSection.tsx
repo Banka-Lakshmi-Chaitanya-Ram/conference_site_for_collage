@@ -1,5 +1,5 @@
 import React from 'react';
-import { Send, ArrowRight } from 'lucide-react';
+import { ArrowRight, FileText, Sparkles } from 'lucide-react';
 import { conferenceConfig } from '../config/conferenceConfig';
 
 export const HeroSection: React.FC = () => {
@@ -7,69 +7,80 @@ export const HeroSection: React.FC = () => {
 
   return (
     <section id="home" className="hero-section" aria-label="Conference Introduction">
-      <div className="container">
-        <div className="hero-grid">
-          {/* Left Column: Academic Metadata & Direct Information */}
-          <div className="hero-left">
-            <span className="hero-institution-line">
-              Hosted by {university.name}
-            </span>
+      {/* Background Media with Rich Dark Gradient Overlay */}
+      <div className="hero-bg-media">
+        <img
+          src={conference.branding.heroImage}
+          alt="AI and Vision Computing Background"
+          loading="eager"
+        />
+      </div>
+      <div className="hero-gradient-overlay" />
 
-            <h1 className="hero-conf-acronym">{conference.acronym}</h1>
-            <p className="hero-conf-fullname">{conference.fullName}</p>
+      {/* Main Centered Content */}
+      <div className="container" style={{ position: 'relative', zIndex: 3 }}>
+        <div className="hero-content-wrapper">
+          <span className="hero-eyebrow">
+            <Sparkles size={14} />
+            <span>International Conference on</span>
+          </span>
 
-            <p className="hero-conf-summary">
-              An international academic forum bringing together researchers, academicians, and industry engineers
-              to share peer-reviewed contributions across VLSI design, computational intelligence,
-              and communication technologies.
-            </p>
+          <h1 className="hero-subtitle">
+            Vision, Language and Intelligent Computing
+          </h1>
 
-            {/* Clean Scholarly Metadata Table */}
-            <div className="hero-meta-table">
-              <div className="hero-meta-cell">
-                <span className="meta-cell-header">Conference Dates</span>
-                <span className="meta-cell-content">{conference.dates.displayDates}</span>
-                <span className="meta-cell-note">Provisional Schedule</span>
-              </div>
-
-              <div className="hero-meta-cell">
-                <span className="meta-cell-header">Host Campus</span>
-                <span className="meta-cell-content">{university.shortName} Campus</span>
-                <span className="meta-cell-note">Vadlamudi, Guntur, AP</span>
-              </div>
-
-              <div className="hero-meta-cell">
-                <span className="meta-cell-header">Peer Review</span>
-                <span className="meta-cell-content">{conference.statusBadge}</span>
-                <span className="meta-cell-note">Double-Blind Review</span>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="hero-actions-bar">
-              <a href="#call-for-papers" className="btn btn-primary">
-                <Send size={13} />
-                <span>Submit Paper</span>
-              </a>
-              <a href="#about-conference" className="btn btn-secondary">
-                <span>About Conference</span>
-                <ArrowRight size={13} />
-              </a>
-            </div>
+          <div className="hero-acronym-display">
+            {conference.acronym}<span className="hero-acronym-dot">.</span>
           </div>
 
-          {/* Right Column: Campus Main Building Photograph */}
-          <div className="campus-photo-container">
-            <div className="campus-photo-frame">
-              <img
-                src={university.campusMainPhoto}
-                alt="Main Administrative and Academic Building, Vignan's Foundation for Science, Technology & Research"
-                loading="eager"
-              />
+          <p className="hero-tagline-text">
+            {conference.tagline}
+          </p>
+
+          <div className="hero-themes-badge">
+            {conference.themeLine}
+          </div>
+
+          <p className="hero-organizer-info">
+            Organized by <strong>{conference.organizingUnit}</strong> • {university.name}, {conference.location}
+          </p>
+
+          {/* Action Buttons */}
+          <div className="hero-actions-center">
+            <a href="#research-tracks" className="btn btn-crimson">
+              <span>Explore Conference Tracks</span>
+              <ArrowRight size={14} />
+            </a>
+            <a href="#call-for-papers" className="btn btn-secondary">
+              <FileText size={14} />
+              <span>View Call for Papers</span>
+            </a>
+            <a
+              href="#submission-guidelines"
+              className="btn btn-outline"
+              style={{ color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.35)' }}
+            >
+              <span>Submission Guidelines</span>
+            </a>
+          </div>
+
+          {/* 4 Quick Facts Clean Centered Grid */}
+          <div className="hero-stats-grid">
+            <div className="hero-stat-cell">
+              <span className="hero-stat-label">Edition</span>
+              <span className="hero-stat-value">{conference.quickFacts.edition}</span>
             </div>
-            <div className="campus-photo-legend">
-              <strong>Main Academic & Administrative Complex</strong>
-              <span>VFSTR Campus, Vadlamudi</span>
+            <div className="hero-stat-cell">
+              <span className="hero-stat-label">Dates</span>
+              <span className="hero-stat-value">{conference.quickFacts.dates}</span>
+            </div>
+            <div className="hero-stat-cell">
+              <span className="hero-stat-label">Venue</span>
+              <span className="hero-stat-value">{conference.quickFacts.venue}</span>
+            </div>
+            <div className="hero-stat-cell">
+              <span className="hero-stat-label">Submission Deadline</span>
+              <span className="hero-stat-value">{conference.quickFacts.submissionDeadline}</span>
             </div>
           </div>
         </div>
@@ -77,3 +88,5 @@ export const HeroSection: React.FC = () => {
     </section>
   );
 };
+
+export default HeroSection;

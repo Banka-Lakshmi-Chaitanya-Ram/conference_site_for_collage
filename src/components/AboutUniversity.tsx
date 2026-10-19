@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ArrowRight, Camera } from 'lucide-react';
 import { conferenceConfig } from '../config/conferenceConfig';
 
 export const AboutUniversity: React.FC = () => {
@@ -10,58 +10,54 @@ export const AboutUniversity: React.FC = () => {
       <div className="container">
         <div className="section-header">
           <span className="section-overline">Host Institution</span>
-          <h2 id="about-univ-heading" className="section-title">About the University</h2>
+          <h2 id="about-univ-heading" className="section-title">{university.heading}</h2>
           <div className="section-rule" />
           <p className="section-subtitle">
-            {university.name}
+            {university.name} • {university.location}
           </p>
         </div>
 
         <div className="univ-grid-layout">
-          {/* Left Column: Second Campus Building Photo (Dome) */}
-          <div className="campus-photo-container">
-            <div className="campus-photo-frame">
-              <img
-                src={university.campusBuildingPhoto}
-                alt="Academic Complex with Dome, Vignan's Foundation for Science, Technology & Research"
-                loading="lazy"
-              />
+          {/* Left Column: Campus Photograph Placeholder per source site specification */}
+          <div className="campus-placeholder-card">
+            <div style={{ display: 'inline-flex', padding: '12px', borderRadius: '50%', backgroundColor: 'var(--bg-tag)', marginBottom: '14px', color: 'var(--academic-navy)' }}>
+              <Camera size={26} />
             </div>
-            <div className="campus-photo-legend">
-              <strong>Campus Academic Complex & Central Plaza</strong>
-              <span>{university.shortName} Campus</span>
-            </div>
+            <p style={{ fontWeight: 700, fontSize: '15px', color: 'var(--academic-navy)', marginBottom: '4px' }}>
+              Authentic VFSTR campus photograph
+            </p>
+            <span style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
+              (to be supplied by organizers)
+            </span>
           </div>
 
-          {/* Right Column: Institutional Overview & Highlights */}
-          <div className="prose-text">
-            <p style={{ fontWeight: 600, color: 'var(--academic-navy)', marginBottom: '8px' }}>
-              {university.status}
+          {/* Right Column: Institutional Overview & Department */}
+          <div className="prose-text" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <p style={{ fontWeight: 700, fontSize: '18px', color: 'var(--academic-navy)', marginBottom: '6px' }}>
+              {university.name}
+            </p>
+            <p style={{ fontSize: '13.5px', color: 'var(--text-muted)', marginBottom: '16px' }}>
+              {university.location}
             </p>
 
-            {university.overview.map((para, idx) => (
-              <p key={idx}>{para}</p>
-            ))}
+            <p style={{ fontSize: '14.5px', lineHeight: 1.75, color: 'var(--text-body)', marginBottom: '24px' }}>
+              {university.body}
+            </p>
 
-            {/* Metrics Grid */}
-            <div className="univ-metrics-grid">
-              {university.highlights.map((item, i) => (
-                <div key={i} className="univ-metric-card">
-                  <div className="metric-label">{item.label}</div>
-                  <div className="metric-value">{item.value}</div>
-                </div>
-              ))}
-            </div>
-
-            <div>
+            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', alignItems: 'center' }}>
               <a
-                href={university.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-outline btn-sm"
+                href="#venue"
+                className="btn btn-primary"
               >
-                <span>Visit University Official Website</span>
-                <ExternalLink size={11} />
+                <span>Venue Information</span>
+                <ArrowRight size={14} />
+              </a>
+              <a
+                href="#contact"
+                className="btn btn-secondary"
+              >
+                <span>Contact Secretariat</span>
+                <ArrowRight size={14} />
               </a>
             </div>
           </div>
@@ -70,3 +66,5 @@ export const AboutUniversity: React.FC = () => {
     </section>
   );
 };
+
+export default AboutUniversity;

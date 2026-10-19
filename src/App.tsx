@@ -3,33 +3,36 @@ import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
 import { AboutConference } from './components/AboutConference';
 import { AboutUniversity } from './components/AboutUniversity';
-import { ImportantDates } from './components/ImportantDates';
-import { CallForPapers } from './components/CallForPapers';
 import { ResearchTracks } from './components/ResearchTracks';
-import { SpeakersSection } from './components/SpeakersSection';
+import { CallForPapers } from './components/CallForPapers';
+import { SubmissionGuidelines } from './components/SubmissionGuidelines';
+import { ImportantDates } from './components/ImportantDates';
 import { CommitteesSection } from './components/CommitteesSection';
-import { ProgramSection } from './components/ProgramSection';
 import { RegistrationSection } from './components/RegistrationSection';
+import { SpeakersSection } from './components/SpeakersSection';
 import { PublicationSection } from './components/PublicationSection';
 import { VenueSection } from './components/VenueSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
+import { PrivacyPolicyModal } from './components/PrivacyPolicyModal';
 
 export const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
 
   useEffect(() => {
     const sectionIds = [
       'home',
       'about-conference',
       'about-university',
-      'important-dates',
-      'call-for-papers',
       'research-tracks',
-      'speakers',
+      'call-for-papers',
+      'submission-guidelines',
+      'important-dates',
       'committees',
-      'program',
       'registration',
+      'speakers',
+      'publication-guidelines',
       'venue',
       'contact'
     ];
@@ -57,27 +60,36 @@ export const App: React.FC = () => {
   return (
     <div className="app-root">
       {/* Navigation Header */}
-      <Header activeSection={activeSection} />
+      <Header
+        activeSection={activeSection}
+        onOpenPrivacyPolicy={() => setIsPrivacyModalOpen(true)}
+      />
 
       {/* Main Content Landmark */}
       <main id="main-content" role="main">
         <HeroSection />
         <AboutConference />
-        <AboutUniversity />
-        <ImportantDates />
-        <CallForPapers />
         <ResearchTracks />
-        <SpeakersSection />
+        <CallForPapers />
+        <SubmissionGuidelines />
+        <ImportantDates />
         <CommitteesSection />
-        <ProgramSection />
         <RegistrationSection />
+        <SpeakersSection />
         <PublicationSection />
+        <AboutUniversity />
         <VenueSection />
         <ContactSection />
       </main>
 
       {/* Footer Landmark */}
-      <Footer />
+      <Footer onOpenPrivacyPolicy={() => setIsPrivacyModalOpen(true)} />
+
+      {/* Privacy Policy Modal */}
+      <PrivacyPolicyModal
+        isOpen={isPrivacyModalOpen}
+        onClose={() => setIsPrivacyModalOpen(false)}
+      />
     </div>
   );
 };

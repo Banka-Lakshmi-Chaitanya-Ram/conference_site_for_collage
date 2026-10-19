@@ -4,9 +4,10 @@ import { conferenceConfig } from '../config/conferenceConfig';
 
 interface HeaderProps {
   activeSection: string;
+  onOpenPrivacyPolicy?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
+export const Header: React.FC<HeaderProps> = ({ activeSection, onOpenPrivacyPolicy }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { conference, university } = conferenceConfig;
 
@@ -33,13 +34,13 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
   const navLinks = [
     { href: '#home', label: 'Home' },
     { href: '#about-conference', label: 'About' },
-    { href: '#call-for-papers', label: 'Call for Papers' },
-    { href: '#important-dates', label: 'Dates' },
     { href: '#research-tracks', label: 'Tracks' },
-    { href: '#speakers', label: 'Speakers' },
+    { href: '#call-for-papers', label: 'Call for Papers' },
+    { href: '#submission-guidelines', label: 'Submission' },
+    { href: '#important-dates', label: 'Dates' },
     { href: '#committees', label: 'Committees' },
-    { href: '#program', label: 'Program' },
     { href: '#registration', label: 'Registration' },
+    { href: '#speakers', label: 'Speakers' },
     { href: '#venue', label: 'Venue' },
     { href: '#contact', label: 'Contact' }
   ];
@@ -51,7 +52,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
         <div className="container top-bar-content">
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <span className="top-bar-inst">{university.name}</span>
-            <span className="top-bar-badge">NAAC A+</span>
+            <span className="top-bar-badge">Dept. of AIML</span>
           </div>
           <div>
             <a
@@ -73,18 +74,20 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
         <div className="container header-container">
           {/* Logo & Conference Brand */}
           <a href="#home" className="brand-block" aria-label="ICVLIC Home">
-            <img
-              src={conference.branding.universityLogo}
-              alt="University Emblem - VFSTR"
-              className="brand-emblem"
-            />
-            <div className="brand-text">
-              <span className="brand-title">{conference.acronym}</span>
-              <span className="brand-sub">VFSTR Deemed to be University</span>
+            <div className="brand-card">
+              <img
+                src={conference.branding.universityLogo}
+                alt="VFSTR Emblem"
+                className="brand-emblem"
+              />
             </div>
+            <div className="brand-divider" />
+            <span className="brand-title">
+              {conference.acronym}<span className="brand-dot">.</span>
+            </span>
           </a>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Clean, uncrowded, single-line */}
           <nav className="nav-desktop" aria-label="Main Navigation">
             {navLinks.map((link) => (
               <a
@@ -96,13 +99,6 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
               </a>
             ))}
           </nav>
-
-          {/* Action Button */}
-          <div className="nav-actions">
-            <a href="#call-for-papers" className="btn btn-primary btn-sm">
-              Submit Paper
-            </a>
-          </div>
 
           {/* Mobile Menu Toggle Button */}
           <button
@@ -117,7 +113,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
         </div>
       </header>
 
-      {/* Mobile Drawer (Only rendered when mobile menu is open) */}
+      {/* Mobile Drawer */}
       {isMobileMenuOpen && (
         <>
           <div
@@ -130,14 +126,16 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
             className="mobile-drawer"
             aria-label="Mobile Navigation"
           >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '12px', borderBottom: '1px solid var(--border-light)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '14px', borderBottom: '1px solid var(--border-light)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <img
                   src={conference.branding.universityLogo}
                   alt="VFSTR Emblem"
-                  style={{ height: '32px', width: 'auto' }}
+                  style={{ height: '28px', width: 'auto' }}
                 />
-                <span style={{ fontWeight: 700, fontSize: '15px', color: 'var(--academic-navy)' }}>{conference.acronym}</span>
+                <span style={{ fontWeight: 800, fontSize: '17px', color: 'var(--academic-navy)' }}>
+                  {conference.acronym}.
+                </span>
               </div>
               <button
                 type="button"
@@ -160,6 +158,17 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                   {link.label}
                 </a>
               ))}
+              <button
+                type="button"
+                className="mobile-nav-link"
+                style={{ background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', width: '100%' }}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  if (onOpenPrivacyPolicy) onOpenPrivacyPolicy();
+                }}
+              >
+                Privacy Policy
+              </button>
             </nav>
 
             <div style={{ marginTop: 'auto', paddingTop: '16px', borderTop: '1px solid var(--border-light)' }}>
@@ -169,7 +178,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                 style={{ width: '100%' }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Submit Paper
+                View Call for Papers
               </a>
             </div>
           </aside>
@@ -178,3 +187,5 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
     </>
   );
 };
+
+export default Header;

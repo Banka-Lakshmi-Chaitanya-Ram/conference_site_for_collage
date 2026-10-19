@@ -12,29 +12,18 @@ export const CommitteesSection: React.FC = () => {
           <h2 id="committees-heading" className="section-title">Conference Committees</h2>
           <div className="section-rule" />
           <p className="section-subtitle">
-            Executive leadership, organizing chairs, and technical advisory board for ICVLIC.
+            Organizing leadership and committee structures for ICVLIC.
           </p>
         </div>
 
         <div className="committee-directory-stack">
           {committees.map((category: CommitteeCategory) => (
             <div key={category.id} className="committee-roster-card">
-              <h3 className="committee-roster-title">{category.title}</h3>
-              {category.description && (
-                <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '12px' }}>
-                  {category.description}
-                </p>
-              )}
-
-              <div className="committee-roster-grid">
-                {category.members.map((member, idx) => (
-                  <div key={idx} className="committee-roster-member">
-                    <span className="member-fullname">{member.name}</span>
-                    {member.role && <span className="member-role-title">{member.role}</span>}
-                    {member.department && <span className="member-dept-inst">{member.department}</span>}
-                    <span className="member-dept-inst">{member.institution}</span>
-                  </div>
-                ))}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
+                <h3 className="committee-roster-title" style={{ margin: 0 }}>{category.title}</h3>
+                <span className="tba-badge">
+                  {category.status}
+                </span>
               </div>
             </div>
           ))}
@@ -43,3 +32,5 @@ export const CommitteesSection: React.FC = () => {
     </section>
   );
 };
+
+export default CommitteesSection;
