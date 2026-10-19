@@ -103,3 +103,27 @@ The website is set up for continuous deployment via **GitHub Actions** directly 
 4. Under **Build and deployment** > **Source**, choose **GitHub Actions**.
 5. Once selected, the workflow will automatically deploy and host your conference site live!
 
+---
+
+## 7. Deploying on Render (Free Static Site)
+
+This repository includes a `render.yaml` blueprint for automatic configuration on [Render](https://render.com/).
+
+### Method A: Connect Repository on Render Dashboard (Recommended)
+1. Go to the [Render Dashboard](https://dashboard.render.com/).
+2. Click **New +** > **Static Site**.
+3. Connect your GitHub account and select repository: `Banka-Lakshmi-Chaitanya-Ram/conference_site_for_collage`.
+4. Render will automatically detect the settings:
+   - **Name**: `icvlic-conference` (or your preferred name)
+   - **Branch**: `main`
+   - **Build Command**: `npm install && npm run build`
+   - **Publish Directory**: `dist`
+5. Click **Create Static Site**.
+6. Render will build and deploy the website to a live URL (e.g. `https://icvlic-conference.onrender.com/`).
+
+### Method B: Render Blueprint (Infrastructure-as-Code)
+1. In Render Dashboard, click **New +** > **Blueprint**.
+2. Select repository `Banka-Lakshmi-Chaitanya-Ram/conference_site_for_collage`.
+3. Render reads `render.yaml` and applies all build commands, caching headers, and SPA rewrite rules automatically!
+
+

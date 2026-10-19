@@ -174,9 +174,10 @@ export interface ConferenceConfig {
 }
 
 export const getAssetUrl = (path: string): string => {
-  const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+  const rawBase = import.meta.env.BASE_URL || './';
+  const base = rawBase === '/' ? '' : rawBase.replace(/\/$/, '');
   const cleanPath = path.replace(/^\//, '');
-  return `${base}/${cleanPath}`;
+  return base ? `${base}/${cleanPath}` : `/${cleanPath}`;
 };
 
 export const conferenceConfig: ConferenceConfig = {
